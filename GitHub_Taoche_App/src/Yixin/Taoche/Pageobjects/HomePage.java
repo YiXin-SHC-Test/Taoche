@@ -21,7 +21,7 @@ public class HomePage {
 	public WebElement SearchInput() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于SearchInput的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.HomePage.SearchInput"));
+				.getLocator("taoche.HomePage.SearchInput_xpath"));
 		return element;
 	}
 
