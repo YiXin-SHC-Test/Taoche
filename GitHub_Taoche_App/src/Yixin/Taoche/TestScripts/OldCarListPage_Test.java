@@ -42,7 +42,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 操作二手车列表页位置元素
-	@Test
+	@Test(priority = 1)
 	public void Select_Location() throws Exception {
 		Log.startTestCase("二手车列表页选择区域操作");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
@@ -50,5 +50,19 @@ public class OldCarListPage_Test extends App_BaseCase {
 		oldCarListPage.Location().click();
 		Assert.assertTrue(selectCityPage.Beijing().isDisplayed());
 		Assert.assertEquals(selectCityPage.Title(), "城市");
+		Assert.assertTrue(driver.getPageSource().contains("安徽"));
 	}
+
+	// 选择一个城市返回到二手车车源列表页面
+	@Test(priority = 2)
+	public void Select_city() throws Exception {
+		Log.startTestCase("城市界面选择'北京'");
+		SelectCityPage selectCityPage = new SelectCityPage(driver);
+		OldCarListPage oldCarListPage = new OldCarListPage(driver);
+		selectCityPage.Selected_City().click();
+		Assert.assertEquals(oldCarListPage.Title(), "二手车");
+		Assert.assertTrue(oldCarListPage.image_list().size() > 0);
+	}
+
+	
 }

@@ -67,4 +67,12 @@ public class SelectCityPage {
 				.getLocator("taoche.SelectCityPage.Fuyang"));
 		return element;
 	}
+
+	// 返回当前被选择的城市
+	public WebElement Selected_City() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于SelectCityPage的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.SelectCityPage.SelectedCiy"));
+		return element;
+	}
 }
