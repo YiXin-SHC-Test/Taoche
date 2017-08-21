@@ -100,6 +100,30 @@ public class OldCarListPage {
 		return element;
 	}
 
+	// 定位价格最低排序的元素
+	public WebElement ByLowPrice() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ByLowPrice的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.ByLowPrice"));
+		return element;
+	}
+
+	// 定位价格最高排序的元素
+	public WebElement ByHighPrice() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ByHighPrice的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.ByHighPrice"));
+		return element;
+	}
+
+	// 定位时间最新的元素
+	public WebElement ByNewTime() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ByNewTime的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.ByNewTime"));
+		return element;
+	}
+
 	// 返回二手车筛选条件中品牌
 	public WebElement BtnBrand() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于BtnBrand的定位方式和定位表达式
@@ -169,6 +193,22 @@ public class OldCarListPage {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于image_list的定位方式和定位表达式
 		elements = driver.findElements(objectMap
 				.getLocator("taoche.OldCarListPage.image_list"));
+		return elements;
+	}
+
+	// 返回二手车列表页淘车认证标识
+	public List<WebElement> AuthMark() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于AuthMark的定位方式和定位表达式
+		elements = driver.findElements(objectMap
+				.getLocator("taoche.OldCarListPage.AuthMark"));
+		return elements;
+	}
+
+	// 返回二手车列表价格列表
+	public List<WebElement> price_list() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于image_list的定位方式和定位表达式
+		elements = driver.findElements(objectMap
+				.getLocator("taoche.OldCarListPage.price_list"));
 		return elements;
 	}
 }
