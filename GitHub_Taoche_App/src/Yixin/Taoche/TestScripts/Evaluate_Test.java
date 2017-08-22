@@ -1,9 +1,5 @@
 package Yixin.Taoche.TestScripts;
 
-import java.util.Set;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,6 +8,7 @@ import Yixin.Taoche.Pageobjects.EvaluatePage;
 import Yixin.Taoche.Pageobjects.EvaluateResultPage;
 import Yixin.Taoche.Pageobjects.HomePage;
 import Yixin.Taoche.Pageobjects.OldCarListPage;
+import Yixin.Taoche.Util.App_common;
 import Yixin.Taoche.Util.Log;
 import Yixin.Taoche.Util.WaitUtil;
 
@@ -34,7 +31,7 @@ public class Evaluate_Test extends App_BaseCase {
 			Assert.assertTrue(evaluatePage.BackBtn().isEnabled());
 			Assert.assertEquals(evaluatePage.txtHasCount().getText(), "实时精准报价");
 			Assert.assertTrue(evaluatePage.txtPercent().isDisplayed());
-			//Assert.assertTrue(evaluatePage.Imv_buy().isEnabled());
+			// Assert.assertTrue(evaluatePage.Imv_buy().isEnabled());
 			Assert.assertTrue(evaluatePage.Imv_sale().isEnabled());
 			Assert.assertTrue(evaluatePage.Car_type().isEnabled());
 			Assert.assertTrue(evaluatePage.CarDate().isEnabled());
@@ -57,12 +54,13 @@ public class Evaluate_Test extends App_BaseCase {
 		evaluatePage.Car_type().click();
 		WaitUtil.sleep(2000);
 		evaluatePage.Select_Brand().click();
-		//System.out.println(driver.get);
-
-		//driver.switchTo().activeElement();
-		evaluatePage.Select_BrandType().click();
+		// 通过点击坐标定位元素
+		App_common app_common = new App_common();
+		app_common.tab(280, 494, driver);
+		WaitUtil.sleep(2000);
 		evaluatePage.Select_Car().click();
 
+		WaitUtil.sleep(2000);
 		evaluatePage.CarDate().click();
 		evaluatePage.TimeSure().click();
 

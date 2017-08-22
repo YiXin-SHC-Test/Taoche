@@ -28,7 +28,7 @@ public class App_common {
 	public void tab(int x, int y, AppiumDriver driver) {
 		try {
 			TouchAction ta = new TouchAction(driver);
-			ta.tap(x, y);
+			ta.tap(x, y).release().perform();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
