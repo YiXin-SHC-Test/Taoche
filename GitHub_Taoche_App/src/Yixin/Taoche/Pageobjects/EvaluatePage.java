@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import Yixin.Taoche.Util.ObjectMap;
 
+// 评估界面
 public class EvaluatePage {
 	private WebElement element = null;
 	// 指定页面元素定位表达式配置文件的绝对文件路径
@@ -29,6 +30,22 @@ public class EvaluatePage {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于BackBtn的定位方式和定位表达式
 		element = driver.findElement(objectMap
 				.getLocator("taoche.EvaluatePage.BackBtn"));
+		return element;
+	}
+
+	// 返回车辆评估页精准报价描述
+	public WebElement txtHasCount() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于txtHasCount的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.EvaluatePage.txtHasCount"));
+		return element;
+	}
+
+	// 返回车辆评估页准确率
+	public WebElement txtPercent() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于txtPercent的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.EvaluatePage.txtPercent"));
 		return element;
 	}
 
@@ -89,7 +106,7 @@ public class EvaluatePage {
 	}
 
 	// 返回车辆评估页车型选择 上牌日期确定按钮
-	public WebElement Time() throws Exception {
+	public WebElement TimeSure() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于Time的定位方式和定位表达式
 		element = driver.findElement(objectMap
 				.getLocator("taoche.EvaluatePage.Time"));

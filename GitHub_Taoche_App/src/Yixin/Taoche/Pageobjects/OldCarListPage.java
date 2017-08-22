@@ -206,9 +206,57 @@ public class OldCarListPage {
 
 	// 返回二手车列表价格列表
 	public List<WebElement> price_list() throws Exception {
-		// 使用objectMap类中的getLocator方法获取配置文件中关于image_list的定位方式和定位表达式
+		// 使用objectMap类中的getLocator方法获取配置文件中关于price_list的定位方式和定位表达式
 		elements = driver.findElements(objectMap
 				.getLocator("taoche.OldCarListPage.price_list"));
 		return elements;
+	}
+
+	// 返回二手车列表车源名称列表
+	public List<WebElement> name_list() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于name_list的定位方式和定位表达式
+		elements = driver.findElements(objectMap
+				.getLocator("taoche.OldCarListPage.name_list"));
+		return elements;
+	}
+
+	// 返回二手车列表车源年信息列表
+	public List<WebElement> ontheyear_list() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ontheyear_list的定位方式和定位表达式
+		elements = driver.findElements(objectMap
+				.getLocator("taoche.OldCarListPage.ontheyear_list"));
+		return elements;
+	}
+
+	// 返回二手车列表车源公里数信息列表
+	public List<WebElement> mileage_list() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于mileage_list的定位方式和定位表达式
+		elements = driver.findElements(objectMap
+				.getLocator("taoche.OldCarListPage.mileage_list"));
+		return elements;
+	}
+
+	// 返回二手车筛选条件中品牌页：不限品牌
+	public WebElement NoBrand() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于NoBrand的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.NoBrand"));
+		return element;
+	}
+
+	// 返回二手车筛选条件中价格：8-10万
+	public WebElement ByPrice8() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ByPrice8的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.ByPrice8"));
+		return element;
+	}
+
+	// 返回筛选条件，点击后删除
+	public WebElement ClosePrice8() throws Exception {
+		//
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.ClosePrice8"));
+		return element;
 	}
 }
