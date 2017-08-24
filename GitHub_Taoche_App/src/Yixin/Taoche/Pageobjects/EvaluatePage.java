@@ -61,7 +61,7 @@ public class EvaluatePage {
 	public WebElement Imv_buy() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于Imv_buy的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.EvaluatePage.Imv_buy"));
+				.getLocator("taoche.EvaluatePage.imv_buy"));
 		return element;
 	}
 
