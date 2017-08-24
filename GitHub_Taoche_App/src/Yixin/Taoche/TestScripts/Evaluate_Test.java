@@ -1,6 +1,7 @@
 package Yixin.Taoche.TestScripts;
 
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import Yixin.Taoche.Modules.App_BaseCase;
@@ -46,7 +47,7 @@ public class Evaluate_Test extends App_BaseCase {
 	}
 
 	@Test(priority = 1)
-	public void Evaluate_execute_Test() throws Exception {
+	public void EvaluateSale_execute_Test() throws Exception {
 		// 默认是车主选项
 		EvaluatePage evaluatePage = new EvaluatePage(driver);
 		EvaluateResultPage evaluateResultPage = new EvaluateResultPage(driver);
@@ -69,8 +70,36 @@ public class Evaluate_Test extends App_BaseCase {
 
 		WaitUtil.sleep(3000);
 
-		Assert.assertEquals(evaluateResultPage.Title().getText(), "卖家评估");
-		Assert.assertTrue(evaluateResultPage.CarResult().isDisplayed());
-		Assert.assertTrue(evaluateResultPage.MsgResult().isDisplayed());
+		try {
+			Assert.assertEquals(evaluateResultPage.Title().getText(), "卖家评估");
+			Assert.assertTrue(evaluateResultPage.CarResult().isDisplayed());
+			Assert.assertTrue(evaluateResultPage.MsgResult().isDisplayed());
+			Assert.assertTrue(evaluateResultPage.BackBtn().isEnabled());
+			Reporter.log("评估-车主验证成功");
+			Log.info("评估-车主验证成功");
+			evaluateResultPage.BackBtn().click();
+		} catch (AssertionError e) {
+			Log.error("评估-车主验证失败");
+			Reporter.log("评估-车主验证失败");
+		}
+	}
+
+	@Test(priority = 2)
+	public void EvaluateBuy_execute_Test() throws Exception {
+		EvaluatePage evaluatePage = new EvaluatePage(driver);
+		EvaluateResultPage evaluateResultPage = new EvaluateResultPage(driver);
+		evaluatePage.Imv_buy().click();
+		evaluatePage.Submit().click();
+		try {
+			Assert.assertTrue(evaluateResultPage.BackBtn().isEnabled());
+			Assert.assertEquals(evaluateResultPage.Title_buy(), "买家评估");
+			//Assert.assertTrue(evaluateResultPage.CarResult().isDisplayed());
+			//Assert.assertTrue(evaluateResultPage.MsgResult().isDisplayed());
+			Reporter.log("评估-买家验证成功");
+			Log.info("评估-买家验证成功");
+		} catch (AssertionError e) {
+			Log.error("评估-买家验证失败");
+			Reporter.log("评估-买家验证失败");
+		}
 	}
 }

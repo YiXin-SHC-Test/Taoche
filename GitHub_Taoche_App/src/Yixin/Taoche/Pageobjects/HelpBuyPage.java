@@ -31,4 +31,12 @@ public class HelpBuyPage {
 				.getLocator("taoche.HelpBuyPage.Title"));
 		return element;
 	}
+
+	// 返回分享按钮
+	public WebElement ShareBtn() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ShareBtn的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HelpBuyPage.ShareBtn"));
+		return element;
+	}
 }

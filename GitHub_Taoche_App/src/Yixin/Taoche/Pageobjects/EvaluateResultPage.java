@@ -21,7 +21,7 @@ public class EvaluateResultPage {
 	public WebElement BackBtn() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于BackBtn的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.HomePage.SearchInput_xpath"));
+				.getLocator("taoche.EvaluateResultPage.BackBtn"));
 		return element;
 	}
 
@@ -48,6 +48,12 @@ public class EvaluateResultPage {
 				.getLocator("taoche.EvaluateResultPage.MsgResult"));
 		return element;
 	}
-	
-	// 
+
+	// 返回车辆评估结果页车源数据结果
+	public WebElement Title_buy() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于MsgResult的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.EvaluateResultPage_buy.Title"));
+		return element;
+	}
 }
