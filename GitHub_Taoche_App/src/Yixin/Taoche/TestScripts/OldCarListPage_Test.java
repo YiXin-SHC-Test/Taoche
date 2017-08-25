@@ -173,8 +173,8 @@ public class OldCarListPage_Test extends App_BaseCase {
 		try {
 			oldCarListPage.Collection().click();
 			Assert.assertEquals(collectionPage.Title().getText(), "我收藏的二手车");
-			Assert.assertTrue(collectionPage.CarList().isDisplayed());
-			Assert.assertTrue(collectionPage.DealerList().isDisplayed());
+			Assert.assertTrue(collectionPage.CarList_Title().isDisplayed());
+			Assert.assertTrue(collectionPage.DealerListTitle().isDisplayed());
 			Log.info("Msg:车源收藏页显示正确");
 			Reporter.log("Msg:车源收藏页显示正确");
 		} catch (AssertionError e) {
