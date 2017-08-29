@@ -18,7 +18,7 @@ public class App_common {
 	public void tab(WebElement element, AppiumDriver driver) {
 		try {
 			TouchAction ta = new TouchAction(driver);
-			ta.tap(element);
+			ta.tap(element).release().perform();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public class App_common {
 	// 获取应用占屏幕大小
 	public int[] appScreen(AppiumDriver driver) {
 		int width = driver.manage().window().getSize().getWidth();
-		int heightScreen = driver.manage().window().getSize().getWidth();
+		int heightScreen = driver.manage().window().getSize().getHeight();
 		int[] appWidthAndHight = { width, heightScreen };
 		return appWidthAndHight;
 	}
@@ -57,7 +57,7 @@ public class App_common {
 	public void swipeToDown(AppiumDriver driver, int duration) {
 		int starty = appScreen(driver)[1] * 1 / 8;
 		int endy = appScreen(driver)[1] * 7 / 8;
-		int x = appScreen(driver)[1] * 1 / 2;
+		int x = appScreen(driver)[0] * 1 / 2;
 		try {
 			driver.swipe(x, starty, x, endy, duration);
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class App_common {
 	}
 
 	// 向左滑动
-	public void swipeToLeft(AppiumDriver driver,int duration) {
+	public void swipeToLeft(AppiumDriver driver, int duration) {
 		int startx = appScreen(driver)[0] * 7 / 8;
 		int endx = appScreen(driver)[0] * 1 / 8;
 		int y = appScreen(driver)[1] * 1 / 2;
@@ -74,56 +74,42 @@ public class App_common {
 			driver.swipe(startx, y, endx, y, duration);
 			Thread.sleep(500);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
 	// 向上滑动
-	public void swipeToUp(AppiumDriver driver,int duration) {
+	public void swipeToUp(AppiumDriver driver, int duration) {
 		int starty = appScreen(driver)[1] * 7 / 8;
 		int endy = appScreen(driver)[1] * 1 / 8;
 		int x = appScreen(driver)[0] * 1 / 2;
 		try {
 			driver.swipe(x, starty, x, endy, duration);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
 	// 向右滑动
-	public void swipeToRight(AppiumDriver driver,int duration) {
+	public void swipeToRight(AppiumDriver driver, int duration) {
 		int startx = appScreen(driver)[0] * 1 / 8;
 		int endx = appScreen(driver)[0] * 7 / 8;
 		int y = appScreen(driver)[1] * 1 / 2;
 		try {
 			driver.swipe(startx, y, endx, y, duration);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
 	// 滑动方法，通过参数实现各个方向滑动
-	/*public void swipe(String direction, int duration) {
-		switch (direction) {
-		case "Up":
-			swipeToUp(AppiumDriver dr, duration);
-			break;
-		case "Down":
-			this.swipeToDown(duration);
-			break;
-		case "Left":
-			this.swipeToLeft(duration);
-			break;
-		case "Right":
-			this.swipeToRight(duration);
-			break;
-		default:
-			break;
-		}
-	}*/
+	/*
+	 * public void swipe(String direction, int duration) { switch (direction) {
+	 * case "Up": swipeToUp(AppiumDriver dr, duration); break; case "Down":
+	 * this.swipeToDown(duration); break; case "Left":
+	 * this.swipeToLeft(duration); break; case "Right":
+	 * this.swipeToRight(duration); break; default: break; } }
+	 */
 
 	// 封装swipe方法，实现在某元素上滑动
 	// 在元素上滑动
@@ -221,7 +207,6 @@ public class App_common {
 				Thread.sleep(500);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 

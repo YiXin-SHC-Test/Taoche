@@ -16,6 +16,14 @@ public class LoginPage {
 		this.driver = driver;
 	}
 
+	// 返回页面Title
+	public WebElement Title() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于Title的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.LoginPage.Title"));
+		return element;
+	}
+
 	// 手机快捷登录页
 	// 返回账号密码登录选项
 	public WebElement Zhanghao_login() throws Exception {
@@ -47,6 +55,14 @@ public class LoginPage {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于loginbtn的定位方式和定位表达式
 		element = driver.findElement(objectMap
 				.getLocator("taoche.LoginPage.loginbtn"));
+		return element;
+	}
+
+	// 返回关闭按钮
+	public WebElement Closebtn() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于Close的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.LoginPage.Close"));
 		return element;
 	}
 }

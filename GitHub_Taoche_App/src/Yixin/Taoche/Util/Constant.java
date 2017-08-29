@@ -12,4 +12,6 @@ public class Constant {
 	public static final String[] QuickSearch = { "5万以下", "5-10万", "10-20万",
 			"20万以上", "SUV", "中型车", "紧凑型车", "小型车", "1年以内", "3年以内", "练手车",
 			"淘车认证车"};
+	// 当前版本
+	public static final String CurrentVersion = "V4.1.1";
 }

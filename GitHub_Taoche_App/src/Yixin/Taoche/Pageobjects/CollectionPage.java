@@ -51,12 +51,20 @@ public class CollectionPage {
 		return element;
 	}
 
-	// 返回收藏页编辑后的单选按钮
-	public WebElement CheckBtn() throws Exception {
-		// 使用objectMap类中的getLocator方法获取配置文件中关于CheckBtn的定位方式和定位表达式
+	// 返回收藏页编辑后的全不选按钮
+	public WebElement NoSelectBtn() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于NoSelectBtn的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.CollectionPage.CheckBtn"));
+				.getLocator("taoche.CollectionPage.NoSelectBtn"));
 		return element;
+	}
+
+	// 返回收藏页编辑后的单选按钮
+	public List<WebElement> CheckBtn() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于CheckBtn的定位方式和定位表达式
+		elements = driver.findElements(objectMap
+				.getLocator("taoche.CollectionPage.CheckBtn"));
+		return elements;
 	}
 
 	// 返回收藏页编辑后的底部删除按钮
@@ -68,10 +76,10 @@ public class CollectionPage {
 	}
 
 	// 返回收藏页编辑后的底部取消按钮
-	public WebElement CancleBtn() throws Exception {
+	public WebElement CancelBtn() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于CancleBtn的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.CollectionPage.CancleBtn"));
+				.getLocator("taoche.CollectionPage.CancelBtn"));
 		return element;
 	}
 

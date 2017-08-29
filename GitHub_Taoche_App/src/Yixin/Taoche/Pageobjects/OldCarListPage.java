@@ -259,4 +259,12 @@ public class OldCarListPage {
 				.getLocator("taoche.OldCarListPage.ClosePrice8"));
 		return element;
 	}
+
+	// 返回二手车列表页底部导航:我的
+	public WebElement Mine() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于Mine的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.Mine"));
+		return element;
+	}
 }

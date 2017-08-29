@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
 import Yixin.Taoche.Util.App_common;
+import Yixin.Taoche.Util.Log;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -41,19 +42,22 @@ public class App_BaseCase {
 		capabilities.setCapability(MobileCapabilityType.APP_PACKAGE,
 				"com.taoche.yixin.app");
 		capabilities.setCapability(MobileCapabilityType.APP_ACTIVITY,
-				"com.taoche.yixin.app.activity.home.AppstartActivity");//AppstartActivity
+				"com.taoche.yixin.app.activity.home.AppstartActivity");// AppstartActivity
 		capabilities.setCapability(MobileCapabilityType.APP_WAIT_ACTIVITY,
 				"com.taoche.yixin.app.activity.home.AppstartActivity");
 		// 支持中文输入
 		capabilities.setCapability("unicodeKeyboard", "True");
 		// 重置输入法为系统默认
 		capabilities.setCapability("restKeyboard", "True");
+		// 每次启动时覆盖session，否则第二次后运行会报错不能新建session
+		capabilities.setCapability("sessionOverride", true);
 		// 安装时不对apk进行重签名，设置很有必要，否则有的apk在重签名后无法正常使用
 		capabilities.setCapability("noSign", "True");
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
 				capabilities);
 		Thread.sleep(5000);
 		System.out.println("启动APP");
+		Log.info("启动APP");
 		// driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		Thread.sleep(5000);
 
@@ -81,7 +85,7 @@ public class App_BaseCase {
 	public void afterClass() {
 		driver.quit();
 	}
-	
+
 	// Test每个测试用例执行之前，执行log文件
 	@BeforeTest
 	public void BeforeTest() throws Exception {
