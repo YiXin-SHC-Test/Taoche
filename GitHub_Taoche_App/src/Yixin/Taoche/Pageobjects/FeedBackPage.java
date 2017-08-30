@@ -39,4 +39,20 @@ public class FeedBackPage {
 				.getLocator("taoche.FeedbackPage.HistoryFeedBack"));
 		return element;
 	}
+
+	// 返回历史反馈界面Title
+	public WebElement HistoryFeedBackTitle() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于HistoryFeedBack的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.FeedbackPage.HistoryFeedBack.Title"));
+		return element;
+	}
+
+	// 返回历史反馈界面返回按钮
+	public WebElement HistoryFeedBackBackBtn() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于HistoryFeedBack的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.FeedbackPage.HistoryFeedBack.BackBtn"));
+		return element;
+	}
 }
