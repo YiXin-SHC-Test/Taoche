@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeTest;
 
 import Yixin.Taoche.Util.App_common;
 import Yixin.Taoche.Util.Log;
+import Yixin.Taoche.Util.WaitUtil;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -71,6 +72,10 @@ public class App_BaseCase {
 			// 第一次安装需要执行滑动页面操作
 			App_common app_common = new App_common();
 			app_common.Splash_screen(driver);
+			// 判断当页面中包含启动闪屏页id，等候6秒后再执行后续操作
+		} else if (driver.getPageSource().contains(
+				"com.taoche.yixin.app:id/ad_image")) {
+			WaitUtil.sleep(6000);
 		}
 		// 进入首页后等待界面元素加载完成，再执行其他操作
 		// 定位下部导航栏的"二手车"按钮
@@ -79,6 +84,7 @@ public class App_BaseCase {
 				.id("com.taoche.yixin.app:id/tv_old_car"));
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(tv_old_car));
+		WaitUtil.sleep(20000);
 	}
 
 	@AfterClass(alwaysRun = true)

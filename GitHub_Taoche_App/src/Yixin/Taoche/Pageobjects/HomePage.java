@@ -25,6 +25,14 @@ public class HomePage {
 		return element;
 	}
 
+	// 返回首页轮播图
+	public WebElement Flush_Pic() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于Flush_Pic的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.Flush_Pic"));
+		return element;
+	}
+
 	// 返回首页左上角定位
 	public WebElement Location() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于Location的定位方式和定位表达式
@@ -98,6 +106,69 @@ public class HomePage {
 	public WebElement AuthorCar_OldCar() throws Exception {
 		element = driver.findElement(objectMap
 				.getLocator("taoche.HomePage.AuthorCar_OldCar"));
+		return element;
+	}
+
+	// 返回首页糖豆区域
+	public WebElement SugarBanner() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.SugarBanner"));
+		return element;
+	}
+
+	// 返回首页糖豆-帮您贷款
+	public WebElement Sugar_HelpCredit() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.Sugar_HelpCredit"));
+		return element;
+	}
+
+	// 返回首页糖豆-二手车估价
+	public WebElement Sugar_Evaluate() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.Sugar_Evaluate"));
+		return element;
+	}
+
+	// 返回首页糖豆-高价卖车
+	public WebElement Sugar_SaleCar() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.Sugar_SaleCar"));
+		return element;
+	}
+
+	// 返回首页糖豆-领券中心
+	public WebElement Sugar_Coupon() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.Sugar_Coupon"));
+		return element;
+	}
+
+	// 冲屏页广告 关闭按钮
+	public WebElement CloseAd() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.Advertisement_close"));
+		return element;
+	}
+
+	// 首页二手车Tab选项
+	public WebElement Tab_oldcar() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.tab_oldcar"));
+		return element;
+	}
+
+	// 首页浮球图标
+	public WebElement FloatBall() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.FloatBall"));
+		return element;
+	}
+
+	// 分期Tab页下面的查看全部链接按钮
+	public WebElement Checkall() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HomePage.checkall"));
 		return element;
 	}
 }

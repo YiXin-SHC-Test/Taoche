@@ -39,4 +39,20 @@ public class HelpBuyPage {
 				.getLocator("taoche.HelpBuyPage.ShareBtn"));
 		return element;
 	}
+
+	// 返回分享弹出层的Title信息
+	public WebElement ShareboxTitle() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ShareBtn的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HelpBuyPage.ShareboxTitle"));
+		return element;
+	}
+
+	// 返回分享弹出层的底部取消按钮
+	public WebElement CancleBtn() throws Exception {
+		// 使用objectMap类中的getLocator方法获取配置文件中关于ShareBtn的定位方式和定位表达式
+		element = driver.findElement(objectMap
+				.getLocator("taoche.HelpBuyPage.CancleBtn"));
+		return element;
+	}
 }

@@ -1,5 +1,7 @@
 package Yixin.Taoche.TestScripts;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,120 +15,45 @@ import Yixin.Taoche.Pageobjects.EvaluatePage;
 import Yixin.Taoche.Pageobjects.HomePage;
 import Yixin.Taoche.Pageobjects.ListPage;
 import Yixin.Taoche.Pageobjects.SaleCarPage;
-import Yixin.Taoche.Pageobjects.SearchPage;
-import Yixin.Taoche.Pageobjects.SelectCityPage;
-import Yixin.Taoche.Pageobjects.SelectProductPage;
 import Yixin.Taoche.Pageobjects.SugarPage;
 import Yixin.Taoche.Util.App_common;
 import Yixin.Taoche.Util.Constant;
 import Yixin.Taoche.Util.Log;
 import Yixin.Taoche.Util.WaitUtil;
 
-public class HomePage_Test extends App_BaseCase {
+// 首页默认定位北京，有淘车认证选项
+public class HomePage2_Test extends App_BaseCase {
 	public static Logger logger = Logger.getLogger(HomePage2_Test.class);
 	App_common app_common = new App_common();
 	// ListPage listPage = new ListPage(driver);
 	Constant constant = new Constant();
 
-	// 首页冲屏页测试
+	// 验证首页糖豆区域是否显示
 	@Test(priority = 1)
-	public void PopUpPic_Test() {
-		HomePage homePage = new HomePage(driver);
-		try {
-			if (homePage.CloseAd().isDisplayed()) {
-				Assert.assertTrue(homePage.CloseAd().isEnabled());
-				homePage.CloseAd().click();
-				Log.info("存在首页冲屏广告");
-				Reporter.log("存在首页冲屏广告");
-			}
-		} catch (Exception e) {
-			Log.error("失败：" + e);
-			Reporter.log("失败：" + e);
-		}
-	}
-
-	// 首页轮播图测试
-	@Test(priority = 2)
-	public void FlushPic_Test() throws Exception {
-		HomePage homePage = new HomePage(driver);
-		try {
-			Assert.assertTrue(homePage.Flush_Pic().isEnabled());
-			Log.info("首页轮播图验证成功");
-			Reporter.log("首页轮播图验证成功");
-		} catch (AssertionError e) {
-			Log.error("首页轮播图验证失败" + e);
-			Reporter.log("首页轮播图验证失败" + e);
-		}
-	}
-
-	// 首页地理位置测试
-	@Test(priority = 3)
-	public void Location_Test() throws Exception {
-		HomePage homePage = new HomePage(driver);
-		SelectCityPage selectCityPage = new SelectCityPage(driver);
-		try {
-			// 验证当前位置信息是北京
-			Assert.assertTrue(homePage.Location().getText().equals("北京"));
-			// 进入选择位置界面
-			homePage.Location().click();
-			// 断言选择城市界面信息
-			Assert.assertTrue(selectCityPage.Title().getText().equals("城市"));
-			Assert.assertTrue(selectCityPage.BackBtn().isEnabled());
-			Assert.assertTrue(selectCityPage.Selected_City().getText()
-					.equals("北京"));
-			Log.info("选择位置信息验证成功");
-			Reporter.log("选择位置信息验证成功");
-		} catch (AssertionError e) {
-			Log.error("选择位置信息验证失败");
-			Reporter.log("选择位置信息验证失败");
-		}
-		// 选择当前定位的城市
-		selectCityPage.Selected_City().click();
-	}
-
-	// 点击首页输入框，对跳转的页面进行验证
-	public void SearchInput_Test() throws Exception {
-		HomePage homePage = new HomePage(driver);
-		SearchPage searchPage = new SearchPage(driver);
-		homePage.SearchInput().click();
-		WaitUtil.sleep(3000);
-		try {
-			// 跳转到搜索页面，验证界面元素
-			Assert.assertTrue(searchPage.Input().getText().equals("请输入品牌或车型"));
-			Assert.assertTrue(searchPage.CancelBtn().isEnabled());
-			Assert.assertTrue(searchPage.HotSearchGridView().isDisplayed());
-			// 输入框中输入"宝马"
-			searchPage.Input().sendKeys("宝马");
-			WaitUtil.sleep(2000);
-			searchPage.BMW_X1().click(); // 进入搜索界面的宝马x1界面
-			WaitUtil.sleep(3000);
-			SelectProductPage selectProductPage = new SelectProductPage(driver);
-			selectProductPage.BackBtn().click();
-			searchPage.CancelBtn().click();
-			Log.info("搜索页面验证成功");
-			Reporter.log("搜索页面验证成功");
-		} catch (AssertionError e) {
-			Reporter.log("搜索页面验证失败");
-			Log.error("搜索页面验证失败");
-		}
-	}
-
-	// 验证糖豆
-	@Test(priority = 5)
 	public void SugarBanner_Test() throws Exception {
 		HomePage homePage = new HomePage(driver);
+
 		try {
-			Assert.assertTrue(homePage.SugarBanner().isDisplayed());
-			Log.info("首页显示糖豆区域");
-			Reporter.log("首页显示糖豆区域");
-		} catch (AssertionError e) {
-			Log.error("首页没显示糖豆区域");
-			Reporter.log("首页显示糖豆区域");
+			if (homePage.CloseAd().isDisplayed()) {
+				homePage.CloseAd().click(); // 如果启动APP时显示冲屏页广告，点击关闭按钮
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			homePage.Tab_oldcar().click(); // 当前默认定位在分期，点击切换到二手车Tab项下面
+			try {
+				Assert.assertTrue(homePage.SugarBanner().isDisplayed());
+				Log.info("首页显示糖豆区域");
+				Reporter.log("首页显示糖豆区域");
+			} catch (AssertionError e) {
+				Log.error("首页没显示糖豆区域");
+				Reporter.log("首页显示糖豆区域");
+			}
 		}
 	}
 
 	// 验证首页新增糖豆跳转逻辑-帮您贷款
-	@Test(priority = 6)
+	@Test(priority = 2)
 	public void Sugar_HelpCredit() throws Exception {
 		HomePage homePage = new HomePage(driver);
 		SugarPage sugarPage = new SugarPage(driver);
@@ -147,7 +74,7 @@ public class HomePage_Test extends App_BaseCase {
 	}
 
 	// 验证首页新增糖豆跳转逻辑-二手车估价
-	@Test(priority = 7)
+	@Test(priority = 3)
 	public void Sugar_Evaluate() throws Exception {
 		HomePage homePage = new HomePage(driver);
 		EvaluatePage evaluatePage = new EvaluatePage(driver);
@@ -167,16 +94,15 @@ public class HomePage_Test extends App_BaseCase {
 		}
 	}
 
-	// 验证首页新增糖豆跳转逻辑-卖车
-	@Test(priority = 8)
+	// 验证首页新增糖豆跳转逻辑-二手车估价
+	@Test(priority = 4)
 	public void Sugar_SaleCar() throws Exception {
 		HomePage homePage = new HomePage(driver);
 		SaleCarPage saleCarPage = new SaleCarPage(driver);
 		try {
 			if (homePage.Sugar_SaleCar().isDisplayed()) {
 				homePage.Sugar_SaleCar().click();
-				WaitUtil.waitWebelement_ById(driver,
-						"com.taoche.yixin.app:id/base_tv_center");
+				WaitUtil.sleep(5000);
 				Assert.assertTrue(saleCarPage.Title().isDisplayed());
 				Assert.assertTrue(saleCarPage.BackBtn().isEnabled());
 				saleCarPage.BackBtn().click();
@@ -190,7 +116,7 @@ public class HomePage_Test extends App_BaseCase {
 	}
 
 	// 验证首页新增糖豆跳转逻辑-领券中心
-	@Test(priority = 9)
+	@Test(priority = 5)
 	public void Sugar_Coupon() throws Exception {
 		HomePage homePage = new HomePage(driver);
 		CouponPage couponPage = new CouponPage(driver);
@@ -210,24 +136,8 @@ public class HomePage_Test extends App_BaseCase {
 		}
 	}
 
-	// 默认打开首页定位在"分期"，切换"二手车"Tab下
-	@Test(priority = 10)
-	public void Switch_oldCar() throws Exception {
-		HomePage homePage = new HomePage(driver);
-		try {
-			// 验证分期Tab下，查看全部链接按钮显示
-			Assert.assertTrue(homePage.Checkall().isDisplayed());
-			homePage.Tab_oldcar().click();
-			Log.info("首页默认定位在分期验证成功");
-			Reporter.log("首页默认定位在分期验证成功");
-		} catch (AssertionError e) {
-			Log.error("首页默认定位在分期验证失败");
-			Reporter.log("首页默认定位在分期验证失败");
-		}
-	}
-
 	// 测试首页点击每个品牌跳转页面
-	@Test(priority = 11)
+	@Test(priority = 6)
 	public void Index_PinPai() throws Exception {
 		Log.startTestCase("启动APP");
 		Log.startTestCase("进入APP首页");
@@ -237,13 +147,13 @@ public class HomePage_Test extends App_BaseCase {
 			driver.findElement(
 					By.xpath("//android.widget.TextView[@text=" + "'"
 							+ constant.Pinpai[i] + "'" + "]")).click();
-			// System.out.println("当前定位的元素是:" + constant.Pinpai[i]);
+			//System.out.println("当前定位的元素是:" + constant.Pinpai[i]);
 			WaitUtil.sleep(3000);
 			try {
 				System.out.println("当前定位的元素是:" + constant.Pinpai[i]);
 				// 当点击"更多"时，跳转到的是品牌筛选页面
 				if (constant.Pinpai[i] == "更多") {
-					// listPage.HotBrand();
+					//listPage.HotBrand();
 					// 如果点击的是"更多"则进入品牌筛选
 					Assert.assertTrue(listPage.HotBrand().isDisplayed());
 					listPage.Close_Brand().click();
@@ -267,9 +177,9 @@ public class HomePage_Test extends App_BaseCase {
 	}
 
 	// 测试首页点击快速搜索时，跳转界面
-	@Test(priority = 12)
+	@Test(priority = 7)
 	public void QuickSearch() throws Exception {
-		// app_common.swipeToUp(driver, 2000);
+		//app_common.swipeToUp(driver, 2000);
 		for (int i = 0; i < constant.QuickSearch.length; i++) {
 			driver.findElement(
 					By.xpath("//android.widget.TextView[@text=" + "'"
@@ -291,16 +201,71 @@ public class HomePage_Test extends App_BaseCase {
 		}
 	}
 
-	// 首页验证浮球并点击
-	@Test(priority = 13)
-	public void FloatBall_Test() throws Exception {
+	// 点击跟多筛选条件
+	@Test(priority = 8)
+	public void MoreSearch() throws Exception {
 		HomePage homePage = new HomePage(driver);
-		try {
-			Assert.assertTrue(homePage.FloatBall().isDisplayed());
-			
-		} catch (AssertionError e) {
-			Log.error("首页浮球验证失败：" + e);
-			Reporter.log("首页浮球验证失败：" + e);
+		ListPage listPage = new ListPage(driver);
+		homePage.MoreSearch().click();
+		Assert.assertTrue(listPage.HotCommend().isEnabled());
+		Assert.assertTrue(listPage.Quality().isEnabled());
+		Assert.assertTrue(listPage.Done_btn().isEnabled());
+		listPage.Done_btn().click(); // 关闭更多筛选条件的界面
+	}
+
+	// 超值二手车
+	// 淘车认证车
+	@Test(priority = 9)
+	public void AuthorCar_OldCar() throws Exception {
+		HomePage homePage = new HomePage(driver);
+		ListPage listPage = new ListPage(driver);
+		if (homePage.Location().getText() == "北京") {
+			for (int i = 0; i < 10; i++) {
+				app_common.swipeToUp(driver, 2000);
+				WaitUtil.sleep(1000);
+				if (homePage.AuthorCar_OldCar().isDisplayed()) {
+					break;
+				}
+			}
+			homePage.AuthorCar_OldCar().click();
+			WaitUtil.sleep(2000);
+			listPage.BackBtn().click();
 		}
+	}
+
+	// 超值二手车 品牌认证车
+	@Test(priority = 10)
+	public void BrandCar() throws Exception {
+		ListPage listPage = new ListPage(driver);
+		driver.findElement(By.xpath("//android.widget.TextView[@text='品牌认证车']"))
+				.click();
+		WaitUtil.sleep(2000);
+		listPage.BackBtn().click();
+	}
+
+	// 超值二手车 准新车
+	@Test(priority = 11)
+	public void NewCar() throws Exception {
+		ListPage listPage = new ListPage(driver);
+		driver.findElement(By.xpath("//android.widget.TextView[@text='准新车']"))
+				.click();
+		WaitUtil.sleep(2000);
+		listPage.BackBtn().click();
+	}
+
+	// 猜你喜欢
+	@Test(priority = 12)
+	public void Favourite() throws Exception {
+		for (int i = 0; i < 10; i++) {
+			app_common.swipeToUp(driver, 2000);
+			WaitUtil.sleep(1000);
+			HomePage homePage = new HomePage(driver);
+			if (homePage.Favourite().isDisplayed()) {
+				break;
+			}
+		}
+		List<WebElement> Pics = driver.findElements(By
+				.id("com.taoche.yixin.app:id/imv_car_image"));
+		Assert.assertTrue(Pics.size() > 0);
 	}
 }

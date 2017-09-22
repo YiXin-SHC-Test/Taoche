@@ -1,6 +1,7 @@
 package Yixin.Taoche.TestScripts;
 
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import Yixin.Taoche.Modules.App_BaseCase;
@@ -37,11 +38,34 @@ public class HelpBuyPage_Test extends App_BaseCase {
 
 	// 通坐标定位位置信息
 	@Test(priority = 1)
-	public void StartHelpBuy_Test() {
-		//HelpBuyPage helpBuyPage = new HelpBuyPage(driver);
+	public void StartHelpBuy_Test() throws Exception {
+		HelpBuyPage helpBuyPage = new HelpBuyPage(driver);
 		App_common app_common = new App_common();
 		// 通过坐标，点击开启帮忙服务按钮
-		app_common.tab(202, 350, driver);
-		Assert.assertTrue(driver.getPageSource().contains("关闭"));
+		try {
+			app_common.tab(300, 350, driver);
+			Assert.assertTrue(driver.getPageSource().contains("关闭"));
+			helpBuyPage.BackBtn().click();
+			Log.info("帮买页面跳转验证成功");
+			Reporter.log("帮买页面跳转验证成功");
+		} catch (AssertionError e) {
+			Log.error("帮买页面跳转验证失败：" + e);
+			Reporter.log("帮买页面跳转验证失败：" + e);
+		}
+	}
+
+	// 验证帮买界面，分享弹出层
+	@Test(priority = 2)
+	public void HelpBuy_ShareBox() throws Exception {
+		HelpBuyPage helpBuyPage = new HelpBuyPage(driver);
+		helpBuyPage.ShareBtn().click();
+		WaitUtil.sleep(2000);
+		Assert.assertTrue(helpBuyPage.ShareboxTitle().isDisplayed());
+		Assert.assertTrue(helpBuyPage.CancleBtn().isDisplayed());
+		Assert.assertTrue(driver.getPageSource().contains("微信"));
+		Assert.assertTrue(driver.getPageSource().contains("新浪"));
+		Assert.assertTrue(driver.getPageSource().contains("QQ"));
+		helpBuyPage.CancleBtn().click();
+		helpBuyPage.BackBtn().click();
 	}
 }

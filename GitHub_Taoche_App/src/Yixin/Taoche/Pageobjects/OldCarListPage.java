@@ -267,4 +267,20 @@ public class OldCarListPage {
 				.getLocator("taoche.OldCarListPage.Mine"));
 		return element;
 	}
+
+	// 获取二手车列表页淘车认证图片信息
+	public WebElement AuthCarPic() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.AuthCarPic"));
+		return element;
+	}
+
+	// 获取列表页中淘车认证图片中的删除icon
+	public WebElement AuthCarPicClose() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.OldCarListPage.CloseAuthCarPic"));
+		return element;
+	}
+	
+	// 
 }

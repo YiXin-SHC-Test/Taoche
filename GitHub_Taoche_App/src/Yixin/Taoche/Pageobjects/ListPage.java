@@ -147,4 +147,18 @@ public class ListPage {
 				.getLocator("taoche.ListPage.image_list"));
 		return elements;
 	}
+
+	// 获取列表页淘车认证图片信息
+	public WebElement AuthCarPic() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.ListPage.AuthCarPic"));
+		return element;
+	}
+
+	// 获取列表页中淘车认证图片中的删除icon
+	public WebElement AuthCarPicClose() throws Exception {
+		element = driver.findElement(objectMap
+				.getLocator("taoche.ListPage.AuthCarPicClose"));
+		return element;
+	}
 }

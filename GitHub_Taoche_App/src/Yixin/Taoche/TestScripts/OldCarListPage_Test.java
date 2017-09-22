@@ -13,6 +13,7 @@ import Yixin.Taoche.Pageobjects.CollectionPage;
 import Yixin.Taoche.Pageobjects.EvaluatePage;
 import Yixin.Taoche.Pageobjects.HelpBuyPage;
 import Yixin.Taoche.Pageobjects.HomePage;
+import Yixin.Taoche.Pageobjects.ListPage;
 import Yixin.Taoche.Pageobjects.OldCarListPage;
 import Yixin.Taoche.Pageobjects.OldListSearchPage;
 import Yixin.Taoche.Pageobjects.SaleCarPage;
@@ -29,8 +30,10 @@ public class OldCarListPage_Test extends App_BaseCase {
 		Log.startTestCase("进入淘车二手车列表页");
 		HomePage homePage = new HomePage(driver);
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
+		// 首页点击进入二手车列表页
 		homePage.Oldcar().click();
 		WaitUtil.sleep(2000);
+		// 验证二手车列表页信息
 		try {
 			Assert.assertTrue(oldCarListPage.Location().isEnabled());
 			System.out.println("界面Title是:" + oldCarListPage.Title().getText());
@@ -60,12 +63,13 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 操作二手车列表页位置元素
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1)
 	public void Select_Location_Test() throws Exception {
 		Log.startTestCase("二手车列表页选择区域操作");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		SelectCityPage selectCityPage = new SelectCityPage(driver);
 		try {
+			// 点击二手车列表左上角位置区域
 			oldCarListPage.Location().click();
 			Assert.assertTrue(selectCityPage.Beijing().isDisplayed());
 			Assert.assertEquals(selectCityPage.Title().getText(), "城市");
@@ -79,13 +83,14 @@ public class OldCarListPage_Test extends App_BaseCase {
 		Log.endTestCase("验证选择区域界面完成");
 	}
 
-	// 选择一个城市返回到二手车车源列表页面
-	@Test(priority = 2, enabled = false)
+	// 选择当前定位城市返回到二手车车源列表页面
+	@Test(priority = 2)
 	public void Select_city_Test() throws Exception {
 		Log.startTestCase("城市界面选择'北京'");
 		SelectCityPage selectCityPage = new SelectCityPage(driver);
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		try {
+			// 选择当前定位的城市
 			selectCityPage.Selected_City().click();
 			Assert.assertEquals(oldCarListPage.Title().getText(), "二手车");
 			Assert.assertTrue(oldCarListPage.image_list().size() > 0);
@@ -98,8 +103,8 @@ public class OldCarListPage_Test extends App_BaseCase {
 		Log.endTestCase("返回二手车车源列表");
 	}
 
-	// 选择帮买二手车
-	@Test(priority = 3, enabled = false)
+	// 选择帮买二手车,验证帮买二手车页面信息
+	@Test(priority = 3)
 	public void Help_buy_Test() throws Exception {
 		Log.startTestCase("进入帮买二手车界面");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
@@ -108,6 +113,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 			oldCarListPage.HelpBuy().click();
 			WaitUtil.sleep(3000);
 			Assert.assertEquals(helpBuyPage.Title().getText(), "帮买服务");
+			Assert.assertTrue(helpBuyPage.ShareBtn().isEnabled());
 			/*
 			 * Assert.assertTrue(driver.getPageSource().contains("请选择购车预算"));
 			 * Assert.assertTrue(driver.getPageSource().contains("提交"));
@@ -124,7 +130,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 进入车辆估价界面
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4)
 	public void Evaluate_Test() throws Exception {
 		Log.startTestCase("进入车辆评估界面");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
@@ -144,7 +150,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 进入我要卖车界面
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5)
 	public void SaleCar_Test() throws Exception {
 		Log.startTestCase("进入我要卖车界面");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
@@ -165,7 +171,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 进入车源收藏界面
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6)
 	public void Collection_Test() throws Exception {
 		Log.startTestCase("进入收藏界面");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
@@ -187,16 +193,20 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 在二手车车源列表页执行搜索操作
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7)
 	public void Search_Test() throws Exception {
 		Log.startTestCase("二手车车源列表页执行查询操作");
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
+		ListPage listPage = new ListPage(driver);
 		OldListSearchPage oldListSearchPage = new OldListSearchPage(driver);
 		try {
 			oldCarListPage.Search().click();
 			Assert.assertEquals(oldListSearchPage.HotSearch().getText(), "热门搜索");
-			Assert.assertTrue(oldListSearchPage.Brand().isDisplayed());
-			Assert.assertTrue(oldListSearchPage.NewCar().isEnabled());
+			/*Assert.assertTrue(oldListSearchPage.Brand().isDisplayed());
+			Assert.assertTrue(oldListSearchPage.NewCar().isEnabled());*/
+			//oldListSearchPage.Brand().click();
+			//Assert.assertTrue(driver.getPageSource().contains("品牌认证车"));
+			listPage.BackBtn().click();
 			Log.info("Msg:二手车车源列表页显示正确");
 			Reporter.log("Msg:二手车车源列表页显示正确");
 		} catch (AssertionError e) {
@@ -208,7 +218,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 二手车车源列表页，筛选"淘车认证"车源
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8)
 	public void OrderByAuth_Test() throws Exception {
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		try {
@@ -221,6 +231,8 @@ public class OldCarListPage_Test extends App_BaseCase {
 			oldCarListPage.Bottom_all().click();
 			WaitUtil.sleep(2000);
 			Assert.assertFalse(oldCarListPage.AuthCar().isSelected());
+			Assert.assertFalse(oldCarListPage.AuthCarPic().isDisplayed());
+			oldCarListPage.AuthCar().click();
 			Log.info("Msg:淘车认证筛选执行成功");
 			Reporter.log("Msg:淘车认证筛选执行成功");
 		} catch (AssertionError e) {
@@ -229,8 +241,22 @@ public class OldCarListPage_Test extends App_BaseCase {
 		}
 	}
 
-	// 二手车车源列表页，根据排序-价格最低筛选车源
+	// 二手车车源列表页，点击淘车认证图片，执行淘车认证查询操作
 	@Test(priority = 9)
+	public void AuthCarPicClick_Test() throws Exception {
+		OldCarListPage oldCarListPage = new OldCarListPage(driver);
+		ListPage listPage = new ListPage(driver);
+		// 点击二手车列表页中的"淘车认证"图片
+		oldCarListPage.AuthCarPic().click();
+		// 断言列表页显示情况：筛选条件是淘车认证时，不显示淘车认证图片。
+		Assert.assertFalse(listPage.AuthCarPic().isDisplayed());
+		Assert.assertTrue(listPage.AuthCar().isSelected());
+		WaitUtil.sleep(1000);
+		listPage.BackBtn().click();
+	}
+
+	// 二手车车源列表页，根据排序-价格最低筛选车源
+	@Test(priority = 10)
 	public void OrderBySort_Test() throws Exception {
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		// App_common app_common = new App_common();
@@ -255,7 +281,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 二手车车源列表页，根据时间排序
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 11, enabled = false)
 	public void OrderByTime_Test() throws Exception {
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		try {
@@ -279,7 +305,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 二手车车源列表页，根据品牌：选择不限品牌
-	@Test(priority = 11)
+	@Test(priority = 12)
 	public void OrderByBrand_Test() throws Exception {
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		try {
@@ -296,7 +322,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 二手车车源列表页，根据价格：8-10万
-	@Test(priority = 12)
+	@Test(priority = 13)
 	public void OrderByPrice_Test() throws Exception {
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		try {
@@ -325,7 +351,7 @@ public class OldCarListPage_Test extends App_BaseCase {
 	}
 
 	// 进入列表中第一个车源详情页
-	@Test(priority = 13)
+	@Test(priority = 14)
 	public void Detail_Test() throws Exception {
 		OldCarListPage oldCarListPage = new OldCarListPage(driver);
 		CarDetailPage carDetailPage = new CarDetailPage(driver);
@@ -356,5 +382,5 @@ public class OldCarListPage_Test extends App_BaseCase {
 			Log.error("error:从列表页进入详情页验证失败");
 			Reporter.log("error:从列表页进入详情页验证失败");
 		}
-	}  
+	}
 }

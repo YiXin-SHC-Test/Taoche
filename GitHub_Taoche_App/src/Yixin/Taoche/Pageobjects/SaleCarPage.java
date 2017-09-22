@@ -20,7 +20,7 @@ public class SaleCarPage {
 	public WebElement BackBtn() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于BackBtn的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.SaleCarPage.BackBtn"));
+				.getLocator("taoche.SaleCar.BackBtn"));
 		return element;
 	}
 
@@ -28,7 +28,7 @@ public class SaleCarPage {
 	public WebElement Title() throws Exception {
 		// 使用objectMap类中的getLocator方法获取配置文件中关于Title的定位方式和定位表达式
 		element = driver.findElement(objectMap
-				.getLocator("taoche.SaleCarPage.Title"));
+				.getLocator("taoche.SaleCar.Title"));
 		return element;
 	}
 }

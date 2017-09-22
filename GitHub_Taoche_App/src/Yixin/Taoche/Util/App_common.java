@@ -61,7 +61,8 @@ public class App_common {
 		try {
 			driver.swipe(x, starty, x, endy, duration);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			Log.info("错误信息：" + e);
 		}
 	}
 
@@ -82,6 +83,18 @@ public class App_common {
 	public void swipeToUp(AppiumDriver driver, int duration) {
 		int starty = appScreen(driver)[1] * 7 / 8;
 		int endy = appScreen(driver)[1] * 1 / 8;
+		int x = appScreen(driver)[0] * 1 / 2;
+		try {
+			driver.swipe(x, starty, x, endy, duration);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 向上滑动2
+	public void swipeToUpByPostion(AppiumDriver driver, int duration,int start,int end) {
+		int starty = appScreen(driver)[1] * start;
+		int endy = appScreen(driver)[1] * end;
 		int x = appScreen(driver)[0] * 1 / 2;
 		try {
 			driver.swipe(x, starty, x, endy, duration);
