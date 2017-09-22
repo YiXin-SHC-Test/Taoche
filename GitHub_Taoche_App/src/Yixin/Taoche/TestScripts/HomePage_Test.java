@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import Yixin.Taoche.Modules.App_BaseCase;
 import Yixin.Taoche.Pageobjects.CouponPage;
 import Yixin.Taoche.Pageobjects.EvaluatePage;
+import Yixin.Taoche.Pageobjects.FloatBallPage;
 import Yixin.Taoche.Pageobjects.HomePage;
 import Yixin.Taoche.Pageobjects.ListPage;
 import Yixin.Taoche.Pageobjects.SaleCarPage;
@@ -295,9 +296,11 @@ public class HomePage_Test extends App_BaseCase {
 	@Test(priority = 13)
 	public void FloatBall_Test() throws Exception {
 		HomePage homePage = new HomePage(driver);
+		FloatBallPage floatBallPage = new FloatBallPage(driver);
 		try {
 			Assert.assertTrue(homePage.FloatBall().isDisplayed());
-			
+			homePage.FloatBall().click();
+			floatBallPage.BackBtn().click();
 		} catch (AssertionError e) {
 			Log.error("首页浮球验证失败：" + e);
 			Reporter.log("首页浮球验证失败：" + e);
