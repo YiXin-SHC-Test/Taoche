@@ -29,6 +29,8 @@ public class App_BaseCase {
 		// File app = new File("APK/taoche.apk");
 		// 设置自动化相关参数
 		DesiredCapabilities capabilities = new DesiredCapabilities();
+		// chrome
+		//capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "chrome");
 		// 不需要再次安装
 		capabilities.setCapability("noReset", true);
 		// 不需要按照的话去掉这个，设置apk的路径

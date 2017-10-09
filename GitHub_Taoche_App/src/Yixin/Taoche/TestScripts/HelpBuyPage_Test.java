@@ -1,5 +1,8 @@
 package Yixin.Taoche.TestScripts;
 
+import java.util.Set;
+
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
@@ -24,6 +27,17 @@ public class HelpBuyPage_Test extends App_BaseCase {
 			WaitUtil.sleep(2000);
 			oldCarListPage.HelpBuy().click();
 
+			Set<String> Handelse = driver.getContextHandles();
+			for (String handel : Handelse) {
+				System.out.println(handel);
+			}
+
+			driver.context("WEBVIEW_com.taoche.yixin.app");
+			driver.findElement(By.id("a_price")).click();
+			WaitUtil.sleep(2000);
+			driver.findElement(By.xpath(".//*[text()='5-8万']")).click();
+
+			WaitUtil.sleep(30000);
 			Assert.assertEquals(helpBuyPage.Title().getText(), "帮买服务");
 			Assert.assertTrue(helpBuyPage.BackBtn().isEnabled());
 			Assert.assertTrue(helpBuyPage.ShareBtn().isEnabled());
@@ -37,7 +51,7 @@ public class HelpBuyPage_Test extends App_BaseCase {
 	}
 
 	// 通坐标定位位置信息
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	public void StartHelpBuy_Test() throws Exception {
 		HelpBuyPage helpBuyPage = new HelpBuyPage(driver);
 		App_common app_common = new App_common();
@@ -55,7 +69,7 @@ public class HelpBuyPage_Test extends App_BaseCase {
 	}
 
 	// 验证帮买界面，分享弹出层
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	public void HelpBuy_ShareBox() throws Exception {
 		HelpBuyPage helpBuyPage = new HelpBuyPage(driver);
 		helpBuyPage.ShareBtn().click();
